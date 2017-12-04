@@ -2,6 +2,7 @@ function onReady() {
   const addToDoForm = document.getElementById('addToDoForm');
   const newToDoText = document.getElementById('newToDoText');
   const toDoList = document.getElementById('toDoList');
+  const deleteToDo = document.getElementById('deleteToDo');
 
   addToDoForm.addEventListener('submit', event => {
     event.preventDefault();
@@ -26,6 +27,16 @@ function onReady() {
     // empty the input
     newToDoText.value = '';
   });
+
+  deleteToDo.addEventListener('submit', event => {
+    event.preventDefault();
+
+    // Get the li's that are checked
+
+    // Remove checked li's from the page
+
+  });
+
 }
 
 window.onload = function() {
