@@ -1,6 +1,7 @@
 function onReady() {
 
   let toDos = [];
+  let id = 0;
   const addToDoForm = document.getElementById('addToDoForm');
   const newToDoText = document.getElementById('newToDoText');
   const toDoList = document.getElementById('toDoList');
@@ -10,29 +11,38 @@ function onReady() {
 
     toDos.push({
       title: newToDoText.value,
-      complete: false
+      complete: false,
+      id: id++
     });
 
     renderTheUI();
   }
 
+  function deleteToDo(id) {
+    toDos = toDos.filter(todo => todo.id != id)
+  }
+
   function renderTheUI() {
-    //
-    const toDoList = document.getElementById('toDoList'); //WHY DO I HAVE TO CALL THIS AGAIN?
-    //
 
     toDoList.textContent = '';
 
-    toDos.forEach(function(toDo) {
+    toDos.forEach(toDo => {
        const newToDo = document.createElement('li');
        const checkbox = document.createElement('input');
        checkbox.type = 'checkbox';
        const title = document.createElement('span');
-       title.textContent = toDo.title;
+       title.textContent = ' ' + toDo.title + ' ';
+       const deleteButton = document.createElement('button');
 
        toDoList.appendChild(newToDo);
        newToDo.appendChild(checkbox);
        newToDo.appendChild(title);
+       newToDo.appendChild(deleteButton);
+
+       deleteButton.addEventListener('submit', event => {
+        deleteToDo(toDo.id);
+        renderTheUI();
+       });
 
     });
   }
@@ -41,7 +51,7 @@ function onReady() {
     event.preventDefault();
     createNewToDo();
     newToDoText.value = '';
-  })
+  });
 
   renderTheUI();
 
