@@ -20,15 +20,20 @@ function onReady() {
 
   deleteToDo.addEventListener('submit', event => {
     event.preventDefault();
-    debugger
+
     // Get the li's that are checked
-    let listOfInputs = document.getElementsByTagName("input");
+    let toDoChecker = document.getElementById('toDoList').getElementsByTagName("input");
+    let checkedToDos = [];
+
+    for(let i = 0; i < toDoChecker.length; i++) {
+      if(toDoChecker[i].checked) {
+        checkedToDos.push(toDoChecker[i].parentNode);
+      }
+    }
 
     // Remove checked li's from the page
-    for(var inpt in listOfInputs) {
-      if(inpt.checked) {
-        inpt.parentNode.remove();
-      }
+    for(let todo = 0; todo < checkedToDos.length; todo++) {
+      checkedToDos[todo].parentNode.removeChild(checkedToDos[todo]);
     }
 
   });
