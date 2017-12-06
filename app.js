@@ -9,17 +9,17 @@ function onReady() {
 
   // ADD TO THE TO-DO LIST
   function createNewToDo() {
-    if (!newToDoText.value) { return; }
 
     toDos.push({
       title: newToDoText.value,
       complete: false,
       id: id++
     });
+
   }
 
   // DELETE FROM THE TO-DO LIST
-  function deleteToDos() {
+  function clearCompleted() {
     let listOfLists = document.getElementsByTagName('li');
 
     for (let i = 0; i < listOfLists.length; i++) {
@@ -29,6 +29,10 @@ function onReady() {
     }
   }
 
+  // SAVE TO LOCAL STORAGE
+  function save() {
+    console.log('saving to local storage');
+  }
 
   // RENDER THE TO-DO LIST
   function renderTheUI() {
@@ -66,16 +70,19 @@ function onReady() {
   // CREATE A NEW TO-TO ON SUBMIT
   addToDoForm.addEventListener('submit', event => {
     event.preventDefault();
+    if (!newToDoText.value) { return; }
     createNewToDo();
     renderTheUI();
+    save();
     newToDoText.value = '';
   });
 
   // DELETE COMPLETED TODOS
   deleteToDoForm.addEventListener('submit', event => {
     event.preventDefault();
-    deleteToDos();
+    clearCompleted();
     renderTheUI();
+    save();
   })
 
   renderTheUI();
