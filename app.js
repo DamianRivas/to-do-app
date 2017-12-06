@@ -1,6 +1,6 @@
 function onReady() {
   // INITIAL VARIABLES
-  let toDos = [];
+  let toDos = JSON.parse(localStorage.getItem("data")) || [];
   let id = 0;
   const addToDoForm = document.getElementById('addToDoForm');
   const newToDoText = document.getElementById('newToDoText');
@@ -32,6 +32,8 @@ function onReady() {
   // SAVE TO LOCAL STORAGE
   function save() {
     console.log('saving to local storage');
+    localStorage.setItem("data", JSON.stringify(toDos));
+    console.log(JSON.parse(localStorage.getItem("data")));
   }
 
   // RENDER THE TO-DO LIST
@@ -61,6 +63,7 @@ function onReady() {
         } else {
           toDo.complete = false;
         }
+        save();
       });
       toDo.id = id++
     });
