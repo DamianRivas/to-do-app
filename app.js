@@ -31,9 +31,7 @@ function onReady() {
 
   // SAVE TO LOCAL STORAGE
   function save() {
-    console.log('saving to local storage');
     localStorage.setItem("data", JSON.stringify(toDos));
-    console.log(JSON.parse(localStorage.getItem("data")));
   }
 
   // RENDER THE TO-DO LIST
