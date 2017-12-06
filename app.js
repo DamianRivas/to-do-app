@@ -1,11 +1,13 @@
 function onReady() {
-
+  // INITIAL VARIABLES
   let toDos = [];
   let id = 0;
   const addToDoForm = document.getElementById('addToDoForm');
   const newToDoText = document.getElementById('newToDoText');
   const toDoList = document.getElementById('toDoList');
+  const deleteToDoForm = document.getElementById('deleteToDoForm');
 
+  // ADD TO THE TO-DO LIST
   function createNewToDo() {
     if(!newToDoText.value) { return; }
 
@@ -14,14 +16,14 @@ function onReady() {
       complete: false,
       id: id++
     });
-
-    renderTheUI();
   }
 
-  function deleteToDo(id) {
-    toDos = toDos.filter(todo => todo.id != id)
+  // DELETE FROM THE TO-DO LIST
+  function deleteToDos() {
   }
 
+
+  // RENDER THE TO-DO LIST
   function renderTheUI() {
 
     toDoList.textContent = '';
@@ -31,27 +33,28 @@ function onReady() {
        const checkbox = document.createElement('input');
        checkbox.type = 'checkbox';
        const title = document.createElement('span');
-       title.textContent = ' ' + toDo.title + ' ';
-       const deleteButton = document.createElement('button');
+       title.textContent = toDo.title
 
        toDoList.appendChild(newToDo);
        newToDo.appendChild(checkbox);
        newToDo.appendChild(title);
-       newToDo.appendChild(deleteButton);
-
-       deleteButton.addEventListener('submit', event => {
-        deleteToDo(toDo.id);
-        renderTheUI();
-       });
 
     });
   }
 
+  // CREATE A NEW TO-TO ON SUBMIT
   addToDoForm.addEventListener('submit', event => {
     event.preventDefault();
     createNewToDo();
+    renderTheUI();
     newToDoText.value = '';
   });
+
+  deleteToDoForm.addEventListener('submit', event => {
+    event.preventDefault();
+    deleteToDos();
+    renderTheUI();
+  })
 
   renderTheUI();
 
